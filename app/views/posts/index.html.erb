@@ -1,0 +1,43 @@
+<h1> Posts by <%= @user.username if @user %>  </h1>
+<div class="container">
+<div class="jumbotron text-right">
+  <h1>التكنولوجية</h1>
+  <p>Observations into the Egyptian tech sector.</p>
+     <%= image_tag("programming.jpeg", class: 'img-responsive' ) %>
+  
+   
+  
+</div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Author</th>
+      <th>Title</th>
+      <th>Blog entry</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= link_to post.user.username, user_posts_path(username: post.user.username) %></td>
+        <td><%= post.title %></td>
+        <td><%= post.blog_entry %></td>
+        <td><%= link_to 'Show', post, class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Edit', edit_post_path(post), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<div class="text-center">
+<%= paginate @posts %>
+<br>
+<%= link_to 'New Post', new_post_path, class: 'btn btn-success ' %>
+</div>
+
